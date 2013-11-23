@@ -340,9 +340,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </scenes>
     <resources>
         <image name="slate12.jpg" width="3264" height="2448"/>
-        <image name="slate12.jpg" width="3264" height="2448"/>
-        <image name="slate12.jpg" width="3264" height="2448"/>
-        <image name="slate12.jpg" width="3264" height="2448"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
