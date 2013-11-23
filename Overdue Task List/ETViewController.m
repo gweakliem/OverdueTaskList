@@ -51,6 +51,10 @@ static NSString *CellIdentifier = @"TaskCell";
     [self performSegueWithIdentifier:@"segueToCreateTask" sender:self];
 }
 
+- (IBAction)reorderButtonPressed:(UIBarButtonItem *)sender {
+    self.taskTableView.editing = !self.taskTableView.editing;
+}
+
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"segueToDetailTaskViewController" sender:indexPath];

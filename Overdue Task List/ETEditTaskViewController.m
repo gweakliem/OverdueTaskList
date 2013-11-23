@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.taskDescriptionTextView.delegate = self;
     [self.taskNameTextField setText:self.task.title];
     [self.taskDescriptionTextView setText:self.task.description];
     [self.taskDatePicker setDate:self.task.date];

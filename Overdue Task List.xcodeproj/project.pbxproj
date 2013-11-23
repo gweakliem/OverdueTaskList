@@ -25,6 +25,7 @@
 		4C7527D61835F1A2000AE668 /* ETCreateTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7527D51835F1A2000AE668 /* ETCreateTaskViewController.m */; };
 		4C7527D91835F1C1000AE668 /* ETDetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7527D81835F1C1000AE668 /* ETDetailTaskViewController.m */; };
 		4C7527DD1835F263000AE668 /* ETTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7527DC1835F263000AE668 /* ETTask.m */; };
+		4C7527DF18415114000AE668 /* slate12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C7527DE18415114000AE668 /* slate12.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		4C7527D81835F1C1000AE668 /* ETDetailTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETDetailTaskViewController.m; sourceTree = "<group>"; };
 		4C7527DB1835F263000AE668 /* ETTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETTask.h; sourceTree = "<group>"; };
 		4C7527DC1835F263000AE668 /* ETTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETTask.m; sourceTree = "<group>"; };
+		4C7527DE18415114000AE668 /* slate12.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = slate12.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		4C7527A31835F045000AE668 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C7527DE18415114000AE668 /* slate12.jpg */,
 				4C7527A41835F045000AE668 /* Overdue Task List-Info.plist */,
 				4C7527A51835F045000AE668 /* InfoPlist.strings */,
 				4C7527A81835F045000AE668 /* main.m */,
@@ -259,6 +262,7 @@
 			files = (
 				4C7527B51835F045000AE668 /* Images.xcassets in Resources */,
 				4C7527A71835F045000AE668 /* InfoPlist.strings in Resources */,
+				4C7527DF18415114000AE668 /* slate12.jpg in Resources */,
 				4C7527B01835F045000AE668 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

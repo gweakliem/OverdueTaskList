@@ -13,6 +13,7 @@
 
 @interface ETViewController : UIViewController<ETTaskEditorDelegate,ETUpdateTaskDelegate,UITableViewDataSource, UITableViewDelegate>
 - (IBAction)addTaskButtonPressed:(id)sender;
+- (IBAction)reorderButtonPressed:(UIBarButtonItem *)sender;
 @property (strong, nonatomic) IBOutlet UITableView *taskTableView;
 @property (strong, nonatomic) NSMutableArray *tasks;
 @end
