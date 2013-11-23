@@ -26,7 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self.taskNameTextField setText:self.task.title];
+    [self.taskDescriptionTextView setText:self.task.description];
+    [self.taskDatePicker setDate:self.task.date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,11 +37,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)saveTaskButton:(UIBarButtonItem *)sender {
+- (IBAction)saveTaskButtonPressed:(UIBarButtonItem *)sender {
+    [self.delegate didUpdateTask:self.task];
 }
 
-- (IBAction)cancelEditButtonPressed:(UIBarButtonItem *)sender {
-}
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
+    [self.delegate didCancelEdit];
 }
+
 @end

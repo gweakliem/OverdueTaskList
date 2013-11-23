@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ETTask.h"
+#import "ETCreateTaskViewController.h"
+#import "ETEditTaskViewController.h"
 
-@interface ETViewController : UIViewController<UITableViewDelegate>
+@interface ETViewController : UIViewController<ETTaskEditorDelegate,ETUpdateTaskDelegate,UITableViewDataSource, UITableViewDelegate>
 - (IBAction)addTaskButtonPressed:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *taskTableView;
-
+@property (strong, nonatomic) NSMutableArray *tasks;
 @end

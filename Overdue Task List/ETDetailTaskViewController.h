@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ETEditTaskViewController.h"
 
-@interface ETDetailTaskViewController : UIViewController
+@interface ETDetailTaskViewController : UIViewController<ETUpdateTaskDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *taskTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskDescriptionLabel;
+@property (strong, nonatomic) ETTask *task;
+@property (weak, nonatomic) id<ETUpdateTaskDelegate> delegate;
+- (IBAction)cancelViewButtonPressed:(UIBarButtonItem *)sender;
 - (IBAction)editTaskButtonPressed:(UIBarButtonItem *)sender;
 
 @end

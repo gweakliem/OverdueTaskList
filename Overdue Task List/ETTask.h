@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define TASK_DATE_FORMAT @"yyyy-MMM-dd"
+
 @interface ETTask : NSObject
+- (id)initWithData:(NSDictionary *)data;
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSString* description;
 @property (strong, nonatomic) NSDate* date;

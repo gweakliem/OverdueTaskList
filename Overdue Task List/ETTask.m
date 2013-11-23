@@ -9,4 +9,21 @@
 #import "ETTask.h"
 
 @implementation ETTask
+-(id) init
+{
+    self = [self initWithData:nil];
+    return self;
+}
+
+- (id)initWithData:(NSDictionary *)data
+{
+    self = [super init];
+    self.title = data[TASK_TITLE];
+    self.description = data[TASK_DESCRIPTION];
+    self.completed = [data[TASK_COMPLETION] boolValue];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:TASK_DATE_FORMAT];
+    self.date = [formatter dateFromString:data[TASK_DATE]];
+    return self;
+}
 @end

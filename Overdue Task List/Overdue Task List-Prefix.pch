@@ -13,4 +13,11 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+#define TASK_KEY @"task"
+#define TASK_TITLE @"title"
+#define TASK_DESCRIPTION @"description"
+#define TASK_DATE @"date"
+#define TASK_COMPLETION @"completion"
+
 #endif

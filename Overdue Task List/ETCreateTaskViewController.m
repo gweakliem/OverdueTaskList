@@ -26,7 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	self.taskDescriptionTextView.delegate = self;
+    self.datePicker.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,8 +37,25 @@
 }
 
 - (IBAction)addTaskButtonPressed:(id)sender {
+    ETTask *task = [[ETTask alloc] init];
+    task.title = self.taskTitleTextBox.text;
+    task.date = self.datePicker.date;
+    task.completed = NO;
+    task.description = self.taskDescriptionTextView.text;
+    [self.delegate didAddTask:task];
 }
 
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
+    [self.delegate didCancelAdd];
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self.taskDescriptionTextView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 @end
