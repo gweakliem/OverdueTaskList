@@ -37,6 +37,14 @@
 }
 
 - (IBAction)addTaskButtonPressed:(id)sender {
+    if ([self.taskTitleTextBox.text length] == 0)
+    {
+        UIAlertView *alert =[[UIAlertView alloc] initWithTitle:@"Error" message:@"You need to enter a task title"
+                                  delegate:nil
+                         cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     ETTask *task = [[ETTask alloc] init];
     task.title = self.taskTitleTextBox.text;
     task.date = self.datePicker.date;

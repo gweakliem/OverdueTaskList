@@ -15,7 +15,7 @@
 -(void) didCancelEdit;
 @end
 
-@interface ETEditTaskViewController : UIViewController
+@interface ETEditTaskViewController : UIViewController<UITextViewDelegate>
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender;
 - (IBAction)saveTaskButtonPressed:(UIBarButtonItem *)sender;
 

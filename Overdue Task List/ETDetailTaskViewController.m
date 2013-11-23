@@ -23,14 +23,19 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)loadControls
 {
-    [super viewDidLoad];
-	[self.taskTitleLabel setText:self.task.title];
+    [self.taskTitleLabel setText:self.task.title];
     [self.taskDescriptionLabel setText:self.task.description];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     [self.taskDateLabel setText:[dateFormatter stringFromDate:self.task.date]];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	[self loadControls];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +69,7 @@
 {
     [self dismissViewControllerAnimated:true completion:nil];
     [self.delegate didUpdateTask:task];
+    [self loadControls];
 }
 
 -(void)didCancelEdit

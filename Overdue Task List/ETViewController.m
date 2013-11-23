@@ -16,6 +16,8 @@
 
 @implementation ETViewController
 
+static NSString *CellIdentifier = @"TaskCell";
+
 - (NSMutableArray *)tasks
 {
     if (!_tasks) {
@@ -80,18 +82,16 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"TaskCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     ETTask *task = [self.tasks objectAtIndex:indexPath.row];
     cell.textLabel.text = task.title;
     cell.detailTextLabel.text =task.description;
-    cell.backgroundColor = [UIColor blackColor];
     // set colors according to completion and due date
     if (task.completed)
     {
-        cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor grayColor];
+        cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor blackColor];
     }
-    else if ([self isDateGreaterThanDate:task.date and: [[NSDate alloc] init] ]) {
+    else if ([self isDateGreaterThanDate: [NSDate date] and: task.date]) {
         cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor redColor];
     }
     else {
@@ -105,19 +105,34 @@
     return 1;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ETTask *task = [self.tasks objectAtIndex:indexPath.row];
+    task.completed = !task.completed;
+    [self didUpdateTask:task];
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return TRUE;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ETTask *task = [self.tasks objectAtIndex:indexPath.row];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.tasks removeObject:task];
+        [self saveTasks];
+        [self.taskTableView reloadData];
+    }
+}
+
 #pragma mark ETTaskEditorDelegate methods
 -(void)didAddTask:(ETTask *)task
 {
     [self.tasks addObject:task];
     
-    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASK_KEY] mutableCopy];
-    if (!tasksAsPropertyLists)
-    {
-        tasksAsPropertyLists = [[NSMutableArray alloc] init];
-    }
-    [tasksAsPropertyLists addObject:[self taskAsPropertyList:task]];
-    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASK_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveTasks];
     [self dismissViewControllerAnimated:true completion:nil];
     [self.taskTableView reloadData];
 }
@@ -127,18 +142,16 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+
 -(void)didUpdateTask:(ETTask *)task
 {
-    //[self.tasks Set]
-    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASK_KEY] mutableCopy];
-    if (!tasksAsPropertyLists)
-    {
-        tasksAsPropertyLists = [[NSMutableArray alloc] init];
-    }
-    [tasksAsPropertyLists addObject:[self taskAsPropertyList:task]];
-    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASK_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    // we should have the same reference to the task that we passed in, but let's just make sure
+    int index = [self.tasks indexOfObject:task];
+    NSLog(@"Found task %@ at index %i",task, index);
+    
+    [self saveTasks];
     [self dismissViewControllerAnimated:true completion:nil];
+    // TODO: doesn't seem to reload, why not?
     [self.taskTableView reloadData];
 }
 
@@ -153,7 +166,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:TASK_DATE_FORMAT];
 
-    NSDictionary *dictionary = @{ TASK_TITLE: task.title, TASK_COMPLETION: [NSString stringWithFormat:@"%hhd",task.completed], TASK_DESCRIPTION: task.description, TASK_DATE: [formatter stringFromDate:task.date]};
+    NSDictionary *dictionary = @{ TASK_TITLE: task.title, TASK_COMPLETION: [NSNumber numberWithBool:task.completed], TASK_DESCRIPTION: task.description, TASK_DATE: [formatter stringFromDate:task.date]};
     return dictionary;
 }
 
@@ -166,6 +179,17 @@
 - (BOOL)isDateGreaterThanDate:(NSDate*)date and:(NSDate*)toDate
 {
     return [date timeIntervalSince1970] > [toDate timeIntervalSince1970];
+}
+
+- (void)saveTasks
+{
+    NSMutableArray *tasksAsPropertyLists = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < self.tasks.count; i++) {
+        [tasksAsPropertyLists addObject:[self taskAsPropertyList:self.tasks[i]]];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASK_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

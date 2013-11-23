@@ -45,4 +45,13 @@
     [self.delegate didCancelEdit];
 }
 
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self.taskDescriptionTextView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
+}
 @end
