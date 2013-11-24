@@ -30,6 +30,7 @@
     [self.taskNameTextField setText:self.task.title];
     [self.taskDescriptionTextView setText:self.task.description];
     [self.taskDatePicker setDate:self.task.date];
+    [self.taskCompletedSwitch setOn:self.task.completed];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +40,10 @@
 }
 
 - (IBAction)saveTaskButtonPressed:(UIBarButtonItem *)sender {
+    self.task.title = [self.taskNameTextField text];
+    self.task.description = [self.taskDescriptionTextView text];
+    self.task.date = [self.taskDatePicker date];
+    self.task.completed = self.taskCompletedSwitch.on;
     [self.delegate didUpdateTask:self.task];
 }
 

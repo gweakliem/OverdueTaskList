@@ -22,6 +22,7 @@
 @property (strong, nonatomic) ETTask* task;
 @property (strong, nonatomic) IBOutlet UITextField *taskNameTextField;
 @property (strong, nonatomic) IBOutlet UITextView *taskDescriptionTextView;
+@property (strong, nonatomic) IBOutlet UISwitch *taskCompletedSwitch;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *taskDatePicker;
 @property (weak,nonatomic) id<ETUpdateTaskDelegate> delegate;

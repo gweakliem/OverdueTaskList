@@ -67,13 +67,13 @@
 // task editor protocol
 -(void)didUpdateTask:(ETTask *)task
 {
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self.navigationController popViewControllerAnimated:true ];
     [self.delegate didUpdateTask:task];
     [self loadControls];
 }
 
 -(void)didCancelEdit
 {
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self.navigationController popViewControllerAnimated:true];
 }
 @end

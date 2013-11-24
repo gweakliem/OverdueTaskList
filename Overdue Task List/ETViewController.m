@@ -116,6 +116,7 @@ static NSString *CellIdentifier = @"TaskCell";
     [self didUpdateTask:task];
 }
 
+#pragma mark deletion support
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return TRUE;
@@ -129,6 +130,20 @@ static NSString *CellIdentifier = @"TaskCell";
         [self saveTasks];
         [self.taskTableView reloadData];
     }
+}
+
+#pragma mark reordering support
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.taskTableView.editing;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    ETTask *movedTask = [self.tasks objectAtIndex:sourceIndexPath.row];
+    [self.tasks removeObjectAtIndex:sourceIndexPath.row];
+    [self.tasks insertObject:movedTask atIndex:destinationIndexPath.row];
+    [self saveTasks];
 }
 
 #pragma mark ETTaskEditorDelegate methods
